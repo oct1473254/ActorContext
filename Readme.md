@@ -38,7 +38,7 @@ The website will be hosted for free and will be open-access.
 5. As student of acting, I want to be able to see how career paths move between theater and film, so that I can see when/how/where actors can make that transition. 
 
 ##Database Architecture
-![image](http://)
+![image](https://raw.githubusercontent.com/oct1473254/ActorContext/master/Database%20Images/Database.002.png)
 
 
 
