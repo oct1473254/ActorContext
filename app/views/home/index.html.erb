@@ -1,0 +1,27 @@
+<h1>Welcome to the Actor Context Website</h1>
+<p>This site will give you more information about your favorite actors!</p>
+
+<p>Just type in the name of the actor below and we'll bring you information from Wikipedia, NYPL, VIAF and IMDB</p>
+
+<h1>Hello, Users</h1>
+<%= link_to 'The Actor Index', controller: 'actors' %>
+
+
+<%= link_to 'Want to provide information about an actor?', new_actor_path %>
+
+<p>
+	<%= form_for :actor, url: actors_path do |f| %>
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </p>
+ 
+  <p>
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </p>
+ 
+  <p>
+    <%= f.submit 'Find' %>
+  </p>
+  <% end %>
+
