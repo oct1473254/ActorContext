@@ -2,9 +2,13 @@
 	<tr>
 		<td><%= @actor.first_name %></td>
 		<td><%= @actor.last_name %></td>
+		<td><h3>Here are the results from the New York Public Library</h3></td>
 		<td><% @actor.nyplsearch %></td>
 		<td><%= @actor.nyplresults %></td>
 		<td><% @actor.wikipedia_search %></td>
+		<td><h3>Here is the Wikipedia Data</h3></td>
 		<td><%= @actor.wikipedia_results %></td>
+		<td><% @actor.imdb_search %></td>
+		<td><h3>Here is the IMDB Data</h3></td>
 		<td><%= @actor.imdb_results %></td>
 	</tr>

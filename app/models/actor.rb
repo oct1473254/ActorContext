@@ -24,26 +24,31 @@ class Actor < ActiveRecord::Base
 	end
 
 	def wikipedia_search
-		page = Wikipedia.find( '#{self.first_name}+#{self.last_name}' ).page.content
+		require 'wikipedia'
+		page = Wikipedia.find( '#{self.first_name}+#{self.last_name}' ).content
 		@found = page
+
 	end
 
 	def wikipedia_results
-		@wikipediaresults = @found.map do |data| 
-			{title: data["title"], itemlink: data["itemLink"]} 
-		end
+		puts "here's the Wikipedia data: #{@found}"
+		@wikipediaresults = @found 
+		# do |data| 
+		# 	{title: data["title"], itemlink: data["itemLink"]} 
+		# end
 	end
 
 	def imdb_search
-		uri = URI("http://www.myapifilms.com/imdb?name=#{@first_name}+#{@last_name}&format=JSON&filmography=1&limit=1&lang=en-us&exactFilter=0&bornDied=1&starSign=1&uniqueName=1&actorActress=1&actorTrivia=1&actorPhotos=N&actorVideos=N&salary=0&spouses=1&tradeMark=0&personalQuotes=1&token=010bafc9-ce69-49b2-a6ef-80e2224e8553")
+		uri = URI("http://www.myapifilms.com/imdb?name=#{@self.first_name}+#{@self.last_name}&format=JSON&filmography=1&limit=1&lang=en-us&exactFilter=0&bornDied=1&starSign=1&uniqueName=1&actorActress=1&actorTrivia=1&actorPhotos=N&actorVideos=N&salary=0&spouses=1&tradeMark=0&personalQuotes=1&token=010bafc9-ce69-49b2-a6ef-80e2224e8553")
 		@response = Net::HTTP.get_response(uri)
 		puts "retrieved from: #{uri}"
 		puts @response.body
 	end 
 
 	def imdb_results
-		@imdb_results = @response["actorActress"].map do |data| 
-			{name: data["birthName"], bio: data["bio"], filmography: data["filmography"], height: data["height"], weblink: data["idIMDB"], personalQuotes: data["personalQuotes"], starSign: data["starSign"], trivia: data["trivia"]} 
-		end
+		@imdb_results = @response
+		# ["actorActress"].map do |data| 
+		# 	{name: data["birthName"], bio: data["bio"], filmography: data["filmography"], height: data["height"], weblink: data["idIMDB"], personalQuotes: data["personalQuotes"], starSign: data["starSign"], trivia: data["trivia"]} 
+		# end
 	end
 end
