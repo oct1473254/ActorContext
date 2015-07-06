@@ -1,9 +1,9 @@
-class Actor 
+class Actor < ActiveRecord::Base
 	# validates :first_name, presence: true
 	# validates :last_name, presence: true
 
 	def nyplsearch
-		url = "http://api.repo.nypl.org/api/v1/items/search.json?q=#{@first_name}+#{@last_name}&field=title"
+		url = "http://api.repo.nypl.org/api/v1/items/search.json?q=#{self.first_name}+#{self.last_name}&field=title"
 	# lines 22 -32 make no sense to me
 		uri = URI.escape(url)
 		puts uri
@@ -24,7 +24,7 @@ class Actor
 	end
 
 	def wikipedia_search
-		page = Wikipedia.find( "#{@first_name}+#{@last_name}" ).content
+		page = Wikipedia.find( '#{self.first_name}+#{self.last_name}' ).page.content
 		@found = page
 	end
 

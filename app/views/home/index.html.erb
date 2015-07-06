@@ -10,7 +10,7 @@
 <%= link_to 'Want to provide information about an actor?', new_actor_path %>
 
 <p>
-	<%= form_for :actor, url: actors_path do |f| %>
+	<%= form_for :actor, url: actors_path, method: :post do |f| %>
     <%= f.label :first_name %><br>
     <%= f.text_field :first_name %>
   </p>

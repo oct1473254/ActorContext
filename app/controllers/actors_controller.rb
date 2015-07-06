@@ -1,4 +1,5 @@
 class ActorsController < ApplicationController
+	
 	def new
 	end
 
@@ -16,7 +17,8 @@ class ActorsController < ApplicationController
 
 
 	def create
-		  @actor = Actor.new(actor_params)
+		# binding.pry
+		  @actor = Actor.new(first_name: params[:actor][:first_name], last_name: params[:actor][:last_name])
   			if @actor.save
  			 redirect_to @actor
  			else

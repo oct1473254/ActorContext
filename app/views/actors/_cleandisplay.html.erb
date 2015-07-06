@@ -1,8 +1,10 @@
-<% @actor.each do |actor| %>
+
 	<tr>
-		<td><%= actor.first_name %></td>
-		<td><%= actor.last_name %></td>
-		<td><%= actor.nyplresults %></td>
-		<td><%= actor.nyplresults %></td>
-		<!-- <td><%= actor.wikipedia_results %></td>
-		<td><%= actor.imdb_results %></td> -->
+		<td><%= @actor.first_name %></td>
+		<td><%= @actor.last_name %></td>
+		<td><% @actor.nyplsearch %></td>
+		<td><%= @actor.nyplresults %></td>
+		<td><% @actor.wikipedia_search %></td>
+		<td><%= @actor.wikipedia_results %></td>
+		<td><%= @actor.imdb_results %></td>
+	</tr>
