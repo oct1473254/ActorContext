@@ -52,13 +52,20 @@
         <h3><%= result.name %></h3>
         <h4><%= result.height %></4>
           <p><%= result.bio %></p>
+          <h3>Star Sign</h3>
+          <h4><%= result.starsign %></h4>
+          <br>
+          <h4>Trivia</h4>
+          <p><%= result.trivia %></p>
+          <br>
+          <h3>Personal Quotes</h3>
+          <p><%= result.personalquotes %></p>
+          <br>
+          <h4>Filmography</h4>
+          <p><%= result.title %></p>
           <% end %>
-          <% @actor.imdb_results.each do |film| %>
-          <td>
-            <tr><%= link_to (film.title), film.imdb_link %></tr>
-            <tr><%= film.year %></tr>
-          </td>
-          <% end %>
+
+          
       </div>
     </div>
   </div>

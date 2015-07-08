@@ -4,8 +4,9 @@
   <%= render 'navbar' %>
 
       <div class="jumbotron">
-        <h1>Actor Context</h1>
-        <p>This site will give you more information about your favorite actors!</p>
+        <h1>Person Context</h1>
+        <h3>Find out more about your favorite actors!</h3> 
+        <p>This is a web application that provides context for the artists listed in the Billy Rose Theater Collection at the New York Public Library Digital Collection. </p>
 
         <p>Just type in the name of the actor below and we'll bring you information from Wikipedia, NYPL, and IMDB</p>
 
@@ -32,7 +33,7 @@
 
     <div class="col-lg-6">
       <h4>All the actors in our database?</h4>
-    <%= link_to 'The Actor Index', controller: 'actors' %>
+    <%= link_to 'The Index', controller: 'actors' %>
       <h4>Update on an actor</h4>
     <%= link_to 'Want to provide information about an actor?', new_actor_path %>
       <p>Note: this will not update any of Wikipedia, NYPL external sites.</p>

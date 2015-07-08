@@ -55,7 +55,7 @@ class Actor < ActiveRecord::Base
 	def imdb_results
 		@imdb_results = @response
 		 @response.map do |data| 
-		 	ImdbActor.new(name: data["birthName"], bio: data["bio"], filmography: data["filmographies"], title: data["filmographies"]["filmography"]["title"], imdbid: data["filmographies"]["filmography"]["IMDBId"], year: data["filmographies"]["filmography"]["year"], height: data["height"], weblink: data["idIMDB"], personalquotes: data["personalQuotes"], starsign: data["starSign"], trivia: data["trivia"]) 
+		 	ImdbActor.new(name: data["birthName"], bio: data["bio"], height: data["height"], personalquotes: data["personalQuotes"], starsign: data["starSign"], trivia: data["trivia"]) 
 		 end
 	end
 
