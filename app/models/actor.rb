@@ -1,4 +1,8 @@
 class Actor < ActiveRecord::Base
+   has_many :searches
+   has_many :users, :through => :searches  
+	
+	require 'wikipedia'
 	# validates :first_name, presence: true
 	# validates :last_name, presence: true
 
@@ -19,36 +23,50 @@ class Actor < ActiveRecord::Base
 
 	def nyplresults
 		@nyplresults = @response["nyplAPI"]["response"]["result"].map do |data| 
-			{title: data["title"], itemlink: data["itemLink"]} 
+			NyplActor.new(title: data["title"], itemlink: data["itemLink"], imageID: data["imageID"])
+		end
+	end
+
+	def nyplimage
+		@image_id = @response["nyplAPI"]["response"]["result"].map do |data|
+			{imageid: data["imageId"]}
 		end
 	end
 
 	def wikipedia_search
-		require 'wikipedia'
-		page = Wikipedia.find( '#{self.first_name}+#{self.last_name}' ).content
-		@found = page
+	
+		page = Wikipedia.find( "#{self.first_name}+#{self.last_name}" )
+		clean = page.sanitized_content.html_safe
+		@found = clean
 
 	end
 
 	def wikipedia_results
-		puts "here's the Wikipedia data: #{@found}"
-		@wikipediaresults = @found 
-		# do |data| 
-		# 	{title: data["title"], itemlink: data["itemLink"]} 
-		# end
+		@wikipediaresults = @found
 	end
 
 	def imdb_search
-		uri = URI("http://www.myapifilms.com/imdb?name=#{@self.first_name}+#{@self.last_name}&format=JSON&filmography=1&limit=1&lang=en-us&exactFilter=0&bornDied=1&starSign=1&uniqueName=1&actorActress=1&actorTrivia=1&actorPhotos=N&actorVideos=N&salary=0&spouses=1&tradeMark=0&personalQuotes=1&token=010bafc9-ce69-49b2-a6ef-80e2224e8553")
+		@mykey = ENV['IMDB_KEY']
+		uri = URI("http://www.myapifilms.com/imdb?name=#{self.first_name}+#{self.last_name}&format=JSON&filmography=1&limit=1&lang=en-us&exactFilter=0&bornDied=1&starSign=1&uniqueName=0&actorActress=1&actorTrivia=1&actorPhotos=N&actorVideos=N&salary=1&spouses=1&tradeMark=1&personalQuotes=1&token=#{@mykey}")
 		@response = Net::HTTP.get_response(uri)
-		puts "retrieved from: #{uri}"
-		puts @response.body
+		@response = JSON.parse(@response.body)	
 	end 
 
 	def imdb_results
 		@imdb_results = @response
-		# ["actorActress"].map do |data| 
-		# 	{name: data["birthName"], bio: data["bio"], filmography: data["filmography"], height: data["height"], weblink: data["idIMDB"], personalQuotes: data["personalQuotes"], starSign: data["starSign"], trivia: data["trivia"]} 
-		# end
+		 @response.map do |data| 
+		 	ImdbActor.new(name: data["birthName"], bio: data["bio"], filmography: data["filmography"], height: data["height"], weblink: data["idIMDB"], personalQuotes: data["personalQuotes"], starSign: data["starSign"], trivia: data["trivia"]) 
+		 end
 	end
+
+	def viaf_search
+		uri = URI("http://www.viaf.org/viaf/search?query=cql.any+=+#{self.first_name}+#{self.last_name}&maximumRecords=5&httpAccept=application/json")
+		response = Net::HTTP.get_response(uri)
+		@response = JSON.parse(response.body)
+	end
+
+	def viaf_results
+		@viaf_results = @response
+	end
+
 end

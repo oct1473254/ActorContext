@@ -1,14 +1,80 @@
+	<h1>We've found information about: </h1>
+		<h2><%= @actor.first_name %>&nbsp;<%= @actor.last_name %></h2>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          The New York Public Library
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+       <% @actor.nyplsearch %>
+		<% @actor.nyplresults.each do |result| %>
+      <%= link_to image_tag(result.image_url), result.itemlink %>
+      <h4><%= result.title %></h4>
+      <p><%= result.image_url %></p>
+    <% end %> 
+		<% @actor.nyplimage %>
+		
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Wikipedia
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+      	<% @actor.wikipedia_search %>
+        <%= @actor.wikipedia_results %>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          The Internet Movie Database
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        <% @actor.imdb_search %>
+        <% @actor.imdb_results.each do |result| %>
+        <h3><%= result.name %></h3>
+        <h4><%= result.height %></4>
+          <p><%= result.bio %></p>
+          <% end %>
+          <% result.filmography.each do |film| %>
+          <td>
+            <tr></tr>
+          </td>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFour">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          VIAF
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+      <div class="panel-body">
+      	<% @actor.viaf_search %>
+        <%= @actor.viaf_results %>
+      </div>
+    </div>
+  </div>
+</div>
 
-	<tr>
-		<td><%= @actor.first_name %></td>
-		<td><%= @actor.last_name %></td>
-		<td><h3>Here are the results from the New York Public Library</h3></td>
-		<td><% @actor.nyplsearch %></td>
-		<td><%= @actor.nyplresults %></td>
-		<td><% @actor.wikipedia_search %></td>
-		<td><h3>Here is the Wikipedia Data</h3></td>
-		<td><%= @actor.wikipedia_results %></td>
-		<td><% @actor.imdb_search %></td>
-		<td><h3>Here is the IMDB Data</h3></td>
-		<td><%= @actor.imdb_results %></td>
-	</tr>
+	

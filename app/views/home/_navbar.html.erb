@@ -1,0 +1,18 @@
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Actor Context</a>
+      <ul class="nav navbar-nav navbar-right">
+      	<li></li>
+      	<% if user_signed_in? %>
+      	<%= link_to 'sign out', destroy_user_session_path, method: :delete %>
+      	<% else %>
+      	<%= link_to 'sign in', new_user_session_path, class: 'btn btn-lg'  %>
+      	<%= link_to 'sign up', new_user_registration_path %>
+      	<% end %>
+      	</ul>
+
+    </div>
+  </div>
+</nav>
