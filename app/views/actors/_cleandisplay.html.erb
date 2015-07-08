@@ -53,14 +53,16 @@
         <h4><%= result.height %></4>
           <p><%= result.bio %></p>
           <% end %>
-          <% result.filmography.each do |film| %>
+          <% @actor.imdb_results.each do |film| %>
           <td>
-            <tr></tr>
+            <tr><%= link_to (film.title), film.imdb_link %></tr>
+            <tr><%= film.year %></tr>
           </td>
+          <% end %>
       </div>
     </div>
   </div>
-  <div class="panel panel-default">
+  <!-- <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingFour">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -71,10 +73,10 @@
     <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
       <div class="panel-body">
       	<% @actor.viaf_search %>
-        <%= @actor.viaf_results %>
+        <%#= @actor.viaf_results %>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 	
